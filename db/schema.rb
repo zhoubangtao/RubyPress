@@ -14,82 +14,82 @@
 ActiveRecord::Schema.define(version: 20140424025246) do
 
   create_table "users", force: true do |t|
-    t.string   "login", null: false # login name
-    t.string   "pass", null: false # login password
-    t.string   "nickname", null: false #nickname of the user
-    t.string   "email", null: false
-    t.string   "url", null: false
-    t.string   "activation", null: false
-    t.integer  "status", null: false
-    t.string   "display_name", null: false
-    t.datatime "create_at", null: false # register datetime
-    t.datetime "update_at", null: false # update datetime
+    t.string   "login",        default: "", null: false # login name
+    t.string   "pass",         default: "", null: false # login password
+    t.string   "nickname",     default: "", null: false #nickname of the user
+    t.string   "email",        default: "", null: false
+    t.string   "url",          default: "", null: false
+    t.string   "activation",   default: "", null: false
+    t.integer  "status",       default: 0,  null: false
+    t.string   "display_name", default: "", null: false
+    t.datatime "create_at",                 null: false # register datetime
+    t.datetime "update_at",                 null: false # update datetime
   end
 
   create_table "posts", force: true do |t|
-    t.integer  "user", null: false
-    t.string   "title", null: false
-    t.text   "content", null: false
-    t.text   "excerpt", null: false
-    t.string "status", null:false
-    t.string "comment_status", null: false
-    t.string "ping_status"
-    t.string "password"
-    t.string "name"
-    t.text "to_ping"
-    t.text "pinged"
+    t.integer  "user",                               null: false
+    t.string   "title",                              null: false
+    t.text     "content",                            null: false
+    t.text     "excerpt",                            null: false
+    t.string   "status",         default: "publish", null:false
+    t.string   "comment_status", default: "open",    null: false
+    t.string   "ping_status",    default: "open"
+    t.string   "password"
+    t.string   "name"
+    t.text     "to_ping"
+    t.text     "pinged"
     t.datetime "modified"
     t.datetime "modified_gmt"
-    t.text "content_filtered"
-    t.integer "parent"
-    t.string "guid"
-    t.integer "menu_order"
-    t.string "type"
-    t.string "mime_type"
-    t.integer "comment_count"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "content_filtered"
+    t.integer  "parent"
+    t.string   "guid"
+    t.integer  "menu_order"
+    t.string   "type"
+    t.string   "mime_type"
+    t.integer  "comment_count"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "comments", force: true do |t|
-    t.integer "post_id"
-    t.string "author"
-    t.string "author_email"
-    t.string "author_url"
-    t.string "author_ip"
+    t.integer  "post_id",      default: 0
+    t.string   "author"
+    t.string   "author_email", default: ""
+    t.string   "author_url",   default: ""
+    t.string   "author_ip",    default: ""
+    t.text     "content"
+    t.integer  "karma",        default: 0
+    t.string   "approved",     default: 1
+    t.string   "agent",        default: ""
+    t.string   "type",         default: ""
+    t.string   "parent",       default: 0
+    t.integer  "user_id",      default: 0
     t.datetime "create_at"
     t.datetime "create_at_gmt"
-    t.text "content"
-    t.integer "karma"
-    t.string "approved"
-    t.string "agent"
-    t.string "type"
-    t.string "parent"
-    t.integer "user_id"
   end
 
   create_table "links", force: true do |t|
-    t.integer "id"
-    t.string "url"
-    t.string "name"
-    t.string "image"
-    t.string "target"
-    t.string "description"
-    t.string "visible"
-    t.integer "owner"
-    t.integer "rating"
-    t.string "rel"
-    t.text "notes"
-    t.string "rss"
+    t.integer  "id"
+    t.string   "url",         default: ""
+    t.string   "name",        default: ""
+    t.string   "image",       default: ""
+    t.string   "target",      default: ""
+    t.string   "description", default: ""
+    t.string   "visible",     default: "Y"
+    t.integer  "owner",       default: 1
+    t.integer  "rating",      default: 0
+    t.string   "rel",         default: ""
+    t.text     "notes"
+    t.string   "rss",         default: ""
     t.datetime "create_at"
     t.datetime "update_at"
   end
 
   create_table "options", force: true do |t|
     t.integer "id"
-    t.string "name"
-    t.string "value"
-    t.string "autoload"
+    t.string  "name",     default: "yes"
+    t.string  "value"
+    t.string  "autoload", default: ""
   end
 
 end
