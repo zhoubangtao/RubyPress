@@ -19,10 +19,11 @@ ActiveRecord::Schema.define(version: 20140424025246) do
     t.string   "nickname", null: false #nickname of the user
     t.string   "email", null: false
     t.string   "url", null: false
-    t.datatime "registered", null: false # register datetime
     t.string   "activation", null: false
     t.integer  "status", null: false
     t.string   "display_name", null: false
+    t.datatime "create_at", null: false # register datetime
+    t.datetime "update_at", null: false # update datetime
   end
 
   create_table "posts", force: true do |t|
@@ -56,8 +57,8 @@ ActiveRecord::Schema.define(version: 20140424025246) do
     t.string "author_email"
     t.string "author_url"
     t.string "author_ip"
-    t.datetime "date"
-    t.datetime "date_gmt"
+    t.datetime "create_at"
+    t.datetime "create_at_gmt"
     t.text "content"
     t.integer "karma"
     t.string "approved"
