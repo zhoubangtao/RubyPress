@@ -14,16 +14,22 @@
 ActiveRecord::Schema.define(version: 20140424025246) do
 
   create_table "users", force: true do |t|
-    t.string   "login",        default: "", null: false # login name
-    t.string   "pass",         default: "", null: false # login password
-    t.string   "nickname",     default: "", null: false #nickname of the user
-    t.string   "email",        default: "", null: false
-    t.string   "url",          default: "", null: false
-    t.string   "activation",   default: "", null: false
-    t.integer  "status",       default: 0,  null: false
-    t.string   "display_name", default: "", null: false
-    t.datatime "create_at",                 null: false # register datetime
-    t.datetime "update_at",                 null: false # update datetime
+    t.string   "login",        default: "", limit: 60,  null: false # login name
+    t.string   "pass",         default: "", limit: 64,  null: false # login password
+    t.string   "nickname",     default: "", limit: 50,  null: false #nickname of the user
+    t.string   "email",        default: "", limit: 100, null: false
+    t.string   "url",          default: "", limit: 100, null: false
+    t.string   "activation",   default: "", limit: 60,  null: false
+    t.integer  "status",       default: 0,  limit: 11,  null: false
+    t.string   "display_name", default: "", limit: 250, null: false
+    t.datatime "create_at",                             null: false # register datetime
+    t.datetime "update_at",                             null: false # update datetime
+  end
+
+  create_table "user_extras", force: true do |t|
+    t.integer "user_id"
+    t.string  "key",    limit: 255
+    t.text    "value"
   end
 
   create_table "posts", force: true do |t|
@@ -46,9 +52,15 @@ ActiveRecord::Schema.define(version: 20140424025246) do
     t.integer  "menu_order"
     t.string   "type"
     t.string   "mime_type"
-    t.integer  "comment_count"
+    t.integer  "comments_count"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+  end
+
+  create_table "post_extras", force: true do |t|
+    t.integer "post_id"
+    t.string "key"
+    t.string "value"
   end
 
   create_table "comments", force: true do |t|
@@ -68,8 +80,15 @@ ActiveRecord::Schema.define(version: 20140424025246) do
     t.datetime "create_at_gmt"
   end
 
+  create_table "comment_extras", force: true do |t|
+    t.integer "comment_id",            null: false
+    t.string  "key",       limit: 255
+    t.text    "value"
+  end
+
+  add_index "comment_extras", "key"
+
   create_table "links", force: true do |t|
-    t.integer  "id"
     t.string   "url",         default: ""
     t.string   "name",        default: ""
     t.string   "image",       default: ""
@@ -86,7 +105,6 @@ ActiveRecord::Schema.define(version: 20140424025246) do
   end
 
   create_table "options", force: true do |t|
-    t.integer "id"
     t.string  "name",     default: "yes"
     t.string  "value"
     t.string  "autoload", default: ""
