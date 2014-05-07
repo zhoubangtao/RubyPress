@@ -10,4 +10,4 @@ Thanks
 * Web Framework    -- *Ruby on Rails*
 * Blog Prototype   -- *Wordpress*
 * Admin Template   -- *Matrix Admin* and *Bootstrap*
-* Theme Template   -- *Humen* (a wordpress theme by Alx)
+* Theme Template   -- *Hueman* (a wordpress theme by Alx)
